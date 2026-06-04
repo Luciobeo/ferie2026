@@ -7,19 +7,11 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #F7F6F2;
-  --surface: #FFFFFF;
-  --border: #E2E0D8;
-  --text: #1A1916;
-  --muted: #7A7870;
-  --accent: #2C5F2E;
-  --accent-light: #EAF3DE;
-  --accent-text: #1A3D1C;
-  --warn: #7A2020;
-  --warn-light: #FCEBEB;
-  --w33-bg: #E1F5EE;
-  --w33-border: #5DCAA5;
-  --w33-text: #085041;
+  --bg: #F7F6F2; --surface: #FFFFFF; --border: #E2E0D8;
+  --text: #1A1916; --muted: #7A7870;
+  --accent: #2C5F2E; --accent-light: #EAF3DE; --accent-text: #1A3D1C;
+  --warn: #7A2020; --warn-light: #FCEBEB;
+  --w33-bg: #E1F5EE; --w33-border: #5DCAA5; --w33-text: #085041;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 2rem; }
@@ -29,7 +21,6 @@ header h1 { font-size: 26px; font-weight: 300; letter-spacing: -0.5px; }
 header h1 span { font-weight: 500; }
 header p { font-size: 13px; color: var(--muted); margin-top: 5px; font-family: 'DM Mono', monospace; }
 
-/* CALENDAR GRID */
 .cal-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 2rem; }
 .week-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; }
 .week-box.mandatory { background: var(--w33-bg); border-color: var(--w33-border); }
@@ -41,10 +32,10 @@ header p { font-size: 13px; color: var(--muted); margin-top: 5px; font-family: '
 .week-box.mandatory .wk-sub { color: #1D9E75; }
 .chips { display: flex; flex-wrap: wrap; gap: 3px; min-height: 24px; }
 .chip { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; padding: 2px 7px; border-radius: 20px; background: var(--bg); border: 1px solid var(--border); color: var(--text); }
+.chip-mandatory { background: var(--w33-bg); border-color: var(--w33-border); color: var(--w33-text); }
 .chip .x { cursor: pointer; color: var(--muted); font-size: 14px; line-height: 1; }
 .chip .x:hover { color: var(--warn); }
 
-/* FORM */
 .form-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; }
 .form-title { font-size: 11px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; font-family: 'DM Mono', monospace; margin-bottom: 1rem; }
 .form-row { display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; }
@@ -55,6 +46,7 @@ select:focus { border-color: var(--accent); }
 .weeks-checkboxes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
 .wk-check { display: flex; align-items: center; gap: 5px; font-size: 13px; cursor: pointer; }
 .wk-check input { accent-color: var(--accent); cursor: pointer; width: 15px; height: 15px; }
+.wk-check.disabled-label { opacity: 0.4; cursor: not-allowed; }
 button.btn-add { background: var(--accent); color: #fff; border-color: var(--accent); cursor: pointer; font-weight: 500; white-space: nowrap; padding: 9px 18px; }
 button.btn-add:hover { background: #234d25; }
 button.btn-add:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -62,7 +54,6 @@ button.btn-add:disabled { opacity: 0.5; cursor: not-allowed; }
 .alert.error { background: var(--warn-light); color: var(--warn); border: 1px solid #F7C1C1; }
 .alert.success { background: var(--accent-light); color: var(--accent-text); border: 1px solid #C0DD97; }
 
-/* TABLE */
 .section-label { font-size: 11px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; font-family: 'DM Mono', monospace; margin-bottom: 10px; }
 .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 2rem; }
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
@@ -71,7 +62,7 @@ tbody td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: va
 tbody tr:last-child td { border-bottom: none; }
 tbody tr:hover { background: var(--bg); }
 .badge { display: inline-block; font-size: 11px; padding: 2px 7px; border-radius: 20px; font-weight: 500; margin-right: 3px; margin-bottom: 2px; }
-.b-pm { background: #EEEDFE; color: #3C3489; }
+.b-pm  { background: #EEEDFE; color: #3C3489; }
 .b-eng { background: #E6F1FB; color: #0C447C; }
 .b-des { background: #FAEEDA; color: #633806; }
 .b-pro { background: #FAECE7; color: #712B13; }
@@ -80,19 +71,18 @@ tbody tr:hover { background: var(--bg); }
 .b-w33 { background: var(--w33-bg); color: var(--w33-text); }
 .b-w34 { background: #E6F1FB; color: #0C447C; }
 .b-w35 { background: #FDE8F0; color: #7A1040; }
-.ok-txt { color: var(--accent); font-size: 12px; font-weight: 500; }
-.err-txt { color: var(--warn); font-size: 12px; font-weight: 500; }
+.ok-txt  { color: var(--accent); font-size: 12px; font-weight: 500; }
+.err-txt { color: var(--warn);   font-size: 12px; font-weight: 500; }
 .del-btn { background: none; border: none; cursor: pointer; color: var(--muted); font-size: 18px; padding: 2px 6px; border-radius: 6px; line-height: 1; }
 .del-btn:hover { background: var(--warn-light); color: var(--warn); }
 .empty { text-align: center; padding: 2.5rem; color: var(--muted); font-size: 13px; font-family: 'DM Mono', monospace; }
 
-/* COVERAGE */
 .coverage-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
 .cov-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; display: flex; align-items: flex-start; gap: 10px; }
 .dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
 .dot.ok { background: #1D9E75; }
 .dot.ko { background: #E24B4A; }
-.cov-name { font-size: 13px; font-weight: 500; }
+.cov-name   { font-size: 13px; font-weight: 500; }
 .cov-detail { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; margin-top: 2px; }
 .loading { text-align: center; padding: 3rem; color: var(--muted); font-family: 'DM Mono', monospace; font-size: 13px; }
 footer { margin-top: 3rem; text-align: center; font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; }
@@ -102,90 +92,134 @@ footer { margin-top: 3rem; text-align: center; font-size: 11px; color: var(--mut
 <div class="page">
   <header>
     <h1>Ferie <span>2026</span></h1>
-    <p>Archimede SpA · W33 obbligatoria · max 3 settimane totali (inclusa W33) · nessuna sovrapposizione</p>
+    <p>Archimede SpA · W33 obbligatoria per tutti · max 2 settimane extra (3 totali) · vincoli di copertura attivi</p>
   </header>
 
   <div id="loading" class="loading">Caricamento dati...</div>
   <div id="app" style="display:none">
-
     <div class="cal-grid" id="cal-grid"></div>
 
     <div class="form-card">
-      <div class="form-title">Nuova richiesta ferie</div>
+      <div class="form-title">Nuova richiesta ferie extra</div>
       <div class="form-row">
         <div class="fg">
           <label>Dipendente</label>
           <select id="sel-person"><option value="">— seleziona —</option></select>
         </div>
         <div class="fg" style="flex:2">
-          <label>Settimane extra (max 2, oltre alla W33 obbligatoria)</label>
+          <label>Settimane extra — max 2 (W33 già inclusa per tutti)</label>
           <div class="weeks-checkboxes" id="week-checks"></div>
         </div>
         <button class="btn-add" id="btn-add" onclick="addRequest()">+ Aggiungi</button>
       </div>
-      <div class="alert error" id="alert-error"></div>
+      <div class="alert error"   id="alert-error"></div>
       <div class="alert success" id="alert-success"></div>
     </div>
 
     <div class="section-label">Riepilogo richieste</div>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>Nome</th><th>Ruolo</th><th>Settimane extra</th><th>Copertura</th><th></th></tr></thead>
+        <thead><tr><th>Nome</th><th>Ruolo</th><th>Settimane (W33 + extra)</th><th>Copertura</th><th></th></tr></thead>
         <tbody id="tbody"></tbody>
       </table>
     </div>
 
-    <div class="section-label">Stato copertura per gruppo</div>
+    <div class="section-label">Stato copertura per gruppo · settimane extra</div>
     <div class="coverage-grid" id="coverage-grid"></div>
-
   </div>
   <footer>ferie2026 · dati condivisi su JSONBin · aggiornato in tempo reale</footer>
 </div>
 
 <script>
-const BIN_ID = "6a214744da38895dfe858b0c";
+const BIN_ID     = "6a214744da38895dfe858b0c";
 const ACCESS_KEY = "$2a$10$BMnvaYHowSajZyahjMXjBO9B4ylXCoFqNN8Sarq54DZQd4a3RJoQO";
-const API_BASE = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+const API_BASE   = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
 
 const WEEKS = [
-  { key: "w31", label: "W31", dates: "28 lug – 2 ago", mandatory: false },
-  { key: "w32", label: "W32", dates: "3–9 ago",        mandatory: false },
-  { key: "w33", label: "W33", dates: "10–16 ago",      mandatory: true  },
-  { key: "w34", label: "W34", dates: "17–23 ago",      mandatory: false },
-  { key: "w35", label: "W35", dates: "24–30 ago",      mandatory: false }
+  { key:"w31", label:"W31", dates:"28 lug – 2 ago", mandatory:false },
+  { key:"w32", label:"W32", dates:"3–9 ago",         mandatory:false },
+  { key:"w33", label:"W33", dates:"10–16 ago",       mandatory:true  },
+  { key:"w34", label:"W34", dates:"17–23 ago",       mandatory:false },
+  { key:"w35", label:"W35", dates:"24–30 ago",       mandatory:false }
 ];
+const EXTRA_WEEKS = WEEKS.filter(w => !w.mandatory);
 
 const EMPLOYEES = [
-  { name: "Stefano Viscardi",    role: "PM",           roleKey: "pm",  linked: ["Lorenzo Vidale"] },
-  { name: "Lorenzo Vidale",      role: "PM",           roleKey: "pm",  linked: ["Stefano Viscardi"] },
-  { name: "Giacomo Sanguin",     role: "Engineering",  roleKey: "eng", linked: ["Laura Marostegan","Mirco Beghetto"] },
-  { name: "Laura Marostegan",    role: "Engineering",  roleKey: "eng", linked: ["Giacomo Sanguin","Mirco Beghetto"] },
-  { name: "Mirco Beghetto",      role: "Engineering",  roleKey: "eng", linked: ["Laura Marostegan","Giacomo Sanguin"] },
-  { name: "Christian Chiarotto", role: "PM / Designer",roleKey: "des", linked: ["Tiziano De Carlo"] },
-  { name: "Tiziano De Carlo",    role: "PM / Designer",roleKey: "des", linked: ["Christian Chiarotto"] },
-  { name: "Alberto De Tonu",     role: "PM",           roleKey: "pm",  linked: [] },
-  { name: "Mirko Rebellato",     role: "Prototipista", roleKey: "pro", linked: ["Mihai Braza"] },
-  { name: "Mihai Braza",         role: "Prototipista", roleKey: "pro", linked: ["Mirko Rebellato"] }
+  { name:"Stefano Viscardi",    role:"PM",            roleKey:"pm",  linked:["Lorenzo Vidale"] },
+  { name:"Lorenzo Vidale",      role:"PM",            roleKey:"pm",  linked:["Stefano Viscardi"] },
+  { name:"Giacomo Sanguin",     role:"Engineering",   roleKey:"eng", linked:["Laura Marostegan","Mirco Beghetto"] },
+  { name:"Laura Marostegan",    role:"Engineering",   roleKey:"eng", linked:["Giacomo Sanguin","Mirco Beghetto"] },
+  { name:"Mirco Beghetto",      role:"Engineering",   roleKey:"eng", linked:["Laura Marostegan","Giacomo Sanguin"] },
+  { name:"Christian Chiarotto", role:"PM / Designer", roleKey:"des", linked:["Tiziano De Carlo"] },
+  { name:"Tiziano De Carlo",    role:"PM / Designer", roleKey:"des", linked:["Christian Chiarotto"] },
+  { name:"Alberto De Tonu",     role:"PM",            roleKey:"pm",  linked:[] },
+  { name:"Mirko Rebellato",     role:"Prototipista",  roleKey:"pro", linked:["Mihai Braza"] },
+  { name:"Mihai Braza",         role:"Prototipista",  roleKey:"pro", linked:["Mirko Rebellato"] }
 ];
 
 const GROUPS = [
-  { label: "PM — Stefano / Lorenzo",           members: ["Stefano Viscardi","Lorenzo Vidale"] },
-  { label: "Engineering",                       members: ["Giacomo Sanguin","Laura Marostegan","Mirco Beghetto"] },
-  { label: "PM/Designer — Christian / Tiziano",members: ["Christian Chiarotto","Tiziano De Carlo"] },
-  { label: "Prototipisti — Mirko / Mihai",      members: ["Mirko Rebellato","Mihai Braza"] }
+  { label:"PM — Stefano / Lorenzo",            members:["Stefano Viscardi","Lorenzo Vidale"] },
+  { label:"Engineering",                        members:["Giacomo Sanguin","Laura Marostegan","Mirco Beghetto"] },
+  { label:"PM/Designer — Christian / Tiziano", members:["Christian Chiarotto","Tiziano De Carlo"] },
+  { label:"Prototipisti — Mirko / Mihai",       members:["Mirko Rebellato","Mihai Braza"] }
 ];
 
 const ROLE_CLASS = { pm:"b-pm", eng:"b-eng", des:"b-des", pro:"b-pro" };
 const WEEK_CLASS = { w31:"b-w31", w32:"b-w32", w33:"b-w33", w34:"b-w34", w35:"b-w35" };
 
-// requests = [ { name, extraWeeks: ["w31","w34"] }, ... ]
+// Data model: requests = [{ name: string, extraWeeks: string[] }, ...]
+// extraWeeks = solo le settimane OLTRE alla W33 (max 2)
 let requests = [];
+
+// ── helpers ────────────────────────────────────────────────────────────────
+
+function getEmp(name) {
+  return EMPLOYEES.find(e => e.name === name);
+}
+
+/** Tutte le settimane di assenza di una persona (W33 sempre inclusa) */
+function allAbsent(name) {
+  const r = requests.find(r => r.name === name);
+  return ["w33", ...(r ? r.extraWeeks || [] : [])];
+}
+
+/** Settimane EXTRA di assenza di una persona (esclusa W33) */
+function extraOf(name) {
+  const r = requests.find(r => r.name === name);
+  return r ? (r.extraWeeks || []) : [];
+}
+
+// ── vincolo ────────────────────────────────────────────────────────────────
+/**
+ * Controlla se la persona `name` può prendere `newExtras` come settimane extra.
+ * Regola: per ogni settimana extra richiesta, almeno uno dei linked
+ *         NON deve essere assente in quella stessa settimana.
+ * La W33 è esclusa dal check perché tutti sono assenti → nessuno può coprire.
+ */
+function checkVincolo(name, newExtras) {
+  const emp = getEmp(name);
+  if (!emp || emp.linked.length === 0) return { ok:true };
+
+  const errors = [];
+  for (const wk of newExtras) {
+    // linked assenti in questa settimana extra
+    const absentLinked = emp.linked.filter(ln => allAbsent(ln).includes(wk));
+    if (absentLinked.length === emp.linked.length) {
+      // tutti i linked sono già assenti in questa settimana
+      const wInfo = WEEKS.find(w => w.key === wk);
+      errors.push(`${wInfo.label} (${wInfo.dates}): ${absentLinked.join(" e ")} ${absentLinked.length > 1 ? "sono" : "è"} già assente`);
+    }
+  }
+  return errors.length > 0 ? { ok:false, msg: errors.join(" · ") } : { ok:true };
+}
+
+// ── API ────────────────────────────────────────────────────────────────────
 
 async function loadData() {
   try {
-    const res = await fetch(`${API_BASE}/latest`, { headers: { "X-Access-Key": ACCESS_KEY } });
+    const res  = await fetch(`${API_BASE}/latest`, { headers:{ "X-Access-Key": ACCESS_KEY } });
     const json = await res.json();
-    requests = json.record.requests || [];
+    requests   = json.record.requests || [];
   } catch(e) { requests = []; }
   document.getElementById("loading").style.display = "none";
   document.getElementById("app").style.display = "block";
@@ -197,77 +231,66 @@ async function saveData() {
   try {
     await fetch(API_BASE, {
       method: "PUT",
-      headers: { "Content-Type": "application/json", "X-Access-Key": ACCESS_KEY },
+      headers: { "Content-Type":"application/json", "X-Access-Key": ACCESS_KEY },
       body: JSON.stringify({ requests })
     });
   } catch(e) {}
   document.getElementById("btn-add").disabled = false;
 }
 
-function getEmp(name) { return EMPLOYEES.find(e => e.name === name); }
-
-function getExtraWeeks(name) {
-  const r = requests.find(r => r.name === name);
-  return r ? (r.extraWeeks || []) : [];
-}
-
-function allWeeks(name) {
-  return ["w33", ...getExtraWeeks(name)];
-}
-
-function checkVincolo(name, weeksToAdd) {
-  // weeksToAdd = extra weeks being requested now
-  const allW = ["w33", ...weeksToAdd];
-  const emp = getEmp(name);
-  const errors = [];
-  if (!emp || emp.linked.length === 0) return { ok: true };
-  for (const wk of allW) {
-    const freeLinked = emp.linked.filter(ln => {
-      const lnWeeks = allWeeks(ln);
-      return !lnWeeks.includes(wk);
-    });
-    if (freeLinked.length === 0) {
-      const wInfo = WEEKS.find(w => w.key === wk);
-      errors.push(`${wInfo.label} (${wInfo.dates}): tutti i collegati sono già assenti`);
-    }
-  }
-  if (errors.length > 0) return { ok: false, msg: errors.join(" · ") };
-  return { ok: true };
-}
+// ── actions ────────────────────────────────────────────────────────────────
 
 async function addRequest() {
-  const name = document.getElementById("sel-person").value;
+  const name    = document.getElementById("sel-person").value;
   const checked = [...document.querySelectorAll("#week-checks input:checked")].map(c => c.value);
-  const err = document.getElementById("alert-error");
-  const suc = document.getElementById("alert-success");
-  err.style.display = "none"; suc.style.display = "none";
+  const errEl   = document.getElementById("alert-error");
+  const sucEl   = document.getElementById("alert-success");
+  errEl.style.display = "none";
+  sucEl.style.display = "none";
 
-  if (!name) { showAlert(err, "Seleziona un dipendente."); return; }
-  if (requests.some(r => r.name === name)) { showAlert(err, `${name} ha già una richiesta. Eliminala prima di modificare.`); return; }
-  if (checked.length > 2) { showAlert(err, "Puoi selezionare al massimo 2 settimane extra (3 totali con la W33)."); return; }
+  if (!name) { showAlert(errEl, "Seleziona un dipendente."); return; }
+
+  if (requests.some(r => r.name === name)) {
+    showAlert(errEl, `${name} ha già una richiesta registrata. Eliminala prima di modificarla.`);
+    return;
+  }
+  if (checked.length > 2) {
+    showAlert(errEl, "Puoi selezionare al massimo 2 settimane extra (3 totali inclusa W33).");
+    return;
+  }
 
   const check = checkVincolo(name, checked);
-  if (!check.ok) { showAlert(err, `⚠ Vincolo di copertura non rispettato: ${check.msg}`); return; }
+  if (!check.ok) {
+    showAlert(errEl, `⚠ Vincolo di copertura non rispettato: ${check.msg}`);
+    return;
+  }
 
   requests.push({ name, extraWeeks: checked });
   await saveData();
+
+  // reset form
   document.getElementById("sel-person").value = "";
-  document.querySelectorAll("#week-checks input").forEach(c => c.checked = false);
-  showAlert(suc, `Richiesta di ${name} salvata.`);
+  document.querySelectorAll("#week-checks input").forEach(c => { c.checked = false; c.disabled = false; });
+  document.querySelectorAll(".wk-check").forEach(l => l.classList.remove("disabled-label"));
+
+  showAlert(sucEl, `Richiesta di ${name} salvata correttamente.`);
   render();
 }
 
 async function removeRequest(name) {
-  if (!confirm(`Rimuovere la richiesta di ${name}?`)) return;
+  if (!confirm(`Rimuovere la richiesta di ferie extra di ${name}?`)) return;
   requests = requests.filter(r => r.name !== name);
   await saveData();
   render();
 }
 
 function showAlert(el, msg) {
-  el.textContent = msg; el.style.display = "block";
-  setTimeout(() => el.style.display = "none", 6000);
+  el.textContent = msg;
+  el.style.display = "block";
+  setTimeout(() => el.style.display = "none", 7000);
 }
+
+// ── render ─────────────────────────────────────────────────────────────────
 
 function render() {
   renderCheckboxes();
@@ -279,27 +302,34 @@ function render() {
 
 function renderCheckboxes() {
   const container = document.getElementById("week-checks");
-  const extraWeeks = WEEKS.filter(w => !w.mandatory);
-  container.innerHTML = extraWeeks.map(w =>
+  // preserve checked state across re-renders
+  const alreadyChecked = [...document.querySelectorAll("#week-checks input:checked")].map(c => c.value);
+  container.innerHTML = EXTRA_WEEKS.map(w =>
     `<label class="wk-check">
-      <input type="checkbox" value="${w.key}" onchange="enforceMaxTwo()">
+      <input type="checkbox" value="${w.key}" onchange="enforceMaxTwo()" ${alreadyChecked.includes(w.key) ? "checked" : ""}>
       <span>${w.label} · ${w.dates}</span>
     </label>`
   ).join("");
+  enforceMaxTwo();
 }
 
 function enforceMaxTwo() {
-  const checked = [...document.querySelectorAll("#week-checks input:checked")];
-  if (checked.length >= 2) {
-    document.querySelectorAll("#week-checks input:not(:checked)").forEach(c => c.disabled = true);
-  } else {
-    document.querySelectorAll("#week-checks input").forEach(c => c.disabled = false);
-  }
+  const inputs  = [...document.querySelectorAll("#week-checks input")];
+  const checked = inputs.filter(i => i.checked);
+  inputs.forEach(i => {
+    const label = i.closest(".wk-check");
+    if (checked.length >= 2 && !i.checked) {
+      i.disabled = true;
+      label.classList.add("disabled-label");
+    } else {
+      i.disabled = false;
+      label.classList.remove("disabled-label");
+    }
+  });
 }
 
 function renderSelect() {
-  const sel = document.getElementById("sel-person");
-  const val = sel.value;
+  const sel   = document.getElementById("sel-person");
   const taken = requests.map(r => r.name);
   sel.innerHTML = '<option value="">— seleziona —</option>';
   EMPLOYEES.forEach(e => {
@@ -309,25 +339,36 @@ function renderSelect() {
       sel.appendChild(o);
     }
   });
-  if (val) sel.value = val;
 }
 
 function renderCalendar() {
   const grid = document.getElementById("cal-grid");
   grid.innerHTML = WEEKS.map(w => {
-    const people = w.mandatory
-      ? EMPLOYEES.map(e => e.name.split(" ")[0])
-      : requests.filter(r => r.extraWeeks && r.extraWeeks.includes(w.key)).map(r => r.name.split(" ")[0]);
-    const chipsHtml = people.map(p => {
-      if (w.mandatory) return `<span class="chip">${p}</span>`;
-      const full = requests.find(r => r.name.split(" ")[0] === p || r.name.startsWith(p));
-      const fullName = full ? full.name : p;
-      return `<span class="chip">${p}<span class="x" onclick="removeRequest('${fullName}')">×</span></span>`;
-    }).join("");
-    return `<div class="week-box ${w.mandatory ? 'mandatory' : ''}">
-      <div class="wk-tag">${w.label}${w.mandatory ? ' · obbligatoria' : ' · opzionale'}</div>
+    let chipsHtml = "";
+
+    if (w.mandatory) {
+      // W33: tutti presenti, nessun tasto rimuovi
+      chipsHtml = EMPLOYEES.map(e =>
+        `<span class="chip chip-mandatory">${e.name.split(" ")[0]}</span>`
+      ).join("");
+    } else {
+      // Settimane extra: solo chi ha richiesto quella settimana
+      const inWeek = requests.filter(r => (r.extraWeeks || []).includes(w.key));
+      chipsHtml = inWeek.map(r => {
+        const firstName = r.name.split(" ")[0];
+        // escape apostrofi nel nome per onclick
+        const safeName = r.name.replace(/'/g, "\\'");
+        return `<span class="chip">${firstName}<span class="x" onclick="removeRequest('${safeName}')">×</span></span>`;
+      }).join("");
+    }
+
+    const count = w.mandatory ? EMPLOYEES.length
+      : requests.filter(r => (r.extraWeeks || []).includes(w.key)).length;
+
+    return `<div class="week-box ${w.mandatory ? "mandatory" : ""}">
+      <div class="wk-tag">${w.label} · ${w.mandatory ? "obbligatoria" : "opzionale"}</div>
       <div class="wk-dates">${w.dates}</div>
-      <div class="wk-sub">${w.mandatory ? 'Azienda chiusa' : people.length ? `${people.length} persone` : 'nessuno'}</div>
+      <div class="wk-sub">${w.mandatory ? "Azienda chiusa — tutti" : count ? `${count} ${count === 1 ? "persona" : "persone"}` : "nessuno"}</div>
       <div class="chips">${chipsHtml}</div>
     </div>`;
   }).join("");
@@ -336,57 +377,70 @@ function renderCalendar() {
 function renderTable() {
   const tbody = document.getElementById("tbody");
   if (requests.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="5" class="empty">nessuna richiesta registrata</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="5" class="empty">nessuna richiesta extra registrata</td></tr>';
     return;
   }
+
   tbody.innerHTML = requests.map(r => {
-    const emp = getEmp(r.name);
-    const rc = ROLE_CLASS[emp.roleKey] || "";
+    const emp   = getEmp(r.name);
+    if (!emp) return "";
+    const rc    = ROLE_CLASS[emp.roleKey] || "";
     const extra = r.extraWeeks || [];
-    const weekBadges = ["w33", ...extra].map(wk => {
+
+    // badge W33 sempre prima, poi le extra
+    const allWks   = ["w33", ...extra];
+    const wkBadges = allWks.map(wk => {
       const wInfo = WEEKS.find(w => w.key === wk);
-      return `<span class="badge ${WEEK_CLASS[wk]}">${wInfo.label}${wk === 'w33' ? ' ★' : ''}</span>`;
+      return `<span class="badge ${WEEK_CLASS[wk]}">${wInfo.label}${wk === "w33" ? " ★" : ""}</span>`;
     }).join("");
-    // check coverage for all weeks
-    const covErrors = [];
-    if (emp.linked.length > 0) {
-      for (const wk of ["w33", ...extra]) {
-        const freeLinked = emp.linked.filter(ln => !allWeeks(ln).includes(wk));
-        if (freeLinked.length === 0) {
-          covErrors.push(WEEKS.find(w => w.key === wk).label);
-        }
+
+    // copertura: controlla solo le settimane EXTRA (W33 esclusa — tutti assenti)
+    let covHtml = '<span class="ok-txt">✓ OK</span>';
+    if (emp.linked.length > 0 && extra.length > 0) {
+      const covErrors = extra.filter(wk => {
+        const absentLinked = emp.linked.filter(ln => allAbsent(ln).includes(wk));
+        return absentLinked.length === emp.linked.length;
+      }).map(wk => WEEKS.find(w => w.key === wk).label);
+
+      if (covErrors.length > 0) {
+        covHtml = `<span class="err-txt">✗ Scoperto: ${covErrors.join(", ")}</span>`;
       }
     }
-    const covHtml = covErrors.length === 0
-      ? '<span class="ok-txt">✓ Coperto</span>'
-      : `<span class="err-txt">✗ Scoperto ${covErrors.join(", ")}</span>`;
+
+    const safeName = r.name.replace(/'/g, "\\'");
     return `<tr>
       <td style="font-weight:500">${r.name}</td>
       <td><span class="badge ${rc}">${emp.role}</span></td>
-      <td>${weekBadges}</td>
+      <td>${wkBadges}</td>
       <td>${covHtml}</td>
-      <td><button class="del-btn" onclick="removeRequest('${r.name}')" title="Elimina">×</button></td>
+      <td><button class="del-btn" onclick="removeRequest('${safeName}')" title="Elimina richiesta">×</button></td>
     </tr>`;
   }).join("");
 }
 
 function renderCoverage() {
   const grid = document.getElementById("coverage-grid");
-  grid.innerHTML = GROUPS.flatMap(g => WEEKS.map(w => {
-    const absent = g.members.filter(m => allWeeks(m).includes(w.key));
-    const present = g.members.filter(m => !allWeeks(m).includes(w.key));
-    const ok = present.length > 0;
-    const detail = ok
-      ? `${w.label} · presenti: ${present.map(n => n.split(" ")[0]).join(", ")}`
-      : `${w.label} · ⚠ nessuno presente`;
-    return `<div class="cov-item">
-      <div class="dot ${ok ? 'ok' : 'ko'}"></div>
-      <div>
-        <div class="cov-name">${g.label}</div>
-        <div class="cov-detail">${detail}</div>
-      </div>
-    </div>`;
-  })).join("");
+  // mostra solo le settimane EXTRA (W33 ignorata: tutti assenti per definizione)
+  grid.innerHTML = GROUPS.flatMap(g =>
+    EXTRA_WEEKS.map(w => {
+      // chi del gruppo è assente in questa settimana extra
+      const absent = g.members.filter(m => extraOf(m).includes(w.key));
+      const present = g.members.filter(m => !extraOf(m).includes(w.key));
+      const ok = present.length > 0;
+      const absentNames  = absent.map(n => n.split(" ")[0]).join(", ");
+      const presentNames = present.map(n => n.split(" ")[0]).join(", ");
+      const detail = ok
+        ? `${w.label} · presenti: ${presentNames}${absentNames ? " · assenti: " + absentNames : ""}`
+        : `${w.label} · ⚠ nessuno presente!`;
+      return `<div class="cov-item">
+        <div class="dot ${ok ? "ok" : "ko"}"></div>
+        <div>
+          <div class="cov-name">${g.label}</div>
+          <div class="cov-detail">${detail}</div>
+        </div>
+      </div>`;
+    })
+  ).join("");
 }
 
 loadData();
