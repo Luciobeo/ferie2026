@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ferie 2025 — Archimede SpA</title>
+<title>Ferie 2026 — Archimede SpA</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -192,8 +192,8 @@ footer { margin-top: 3rem; text-align: center; font-size: 11px; color: var(--mut
 <body>
 <div class="page">
   <header>
-    <h1>Ferie <span>2025</span></h1>
-    <p>Archimede SpA · Settimana 33 obbligatoria · max 1 settimana extra</p>
+    <h1>Ferie <span>2026</span></h1>
+    <p>Archimede SpA · Week 33 obbligatoria · max 1 settimana extra</p>
   </header>
 
   <div id="loading" class="loading">Caricamento dati...</div>
@@ -202,18 +202,18 @@ footer { margin-top: 3rem; text-align: center; font-size: 11px; color: var(--mut
     <div class="weeks-row">
       <div class="week-box">
         <div class="wk-tag">Week 32 · opzionale</div>
-        <div class="wk-dates">4–10 agosto</div>
+        <div class="wk-dates">3–9 agosto</div>
         <div class="wk-sub">Settimana precedente</div>
         <div class="chips" id="chips-w32"></div>
       </div>
       <div class="week-box mandatory">
         <div class="wk-tag">Week 33 · obbligatoria</div>
-        <div class="wk-dates">11–17 agosto</div>
+        <div class="wk-dates">10–16 agosto</div>
         <div class="wk-sub">Azienda chiusa — tutti in ferie</div>
       </div>
       <div class="week-box">
         <div class="wk-tag">Week 34 · opzionale</div>
-        <div class="wk-dates">18–24 agosto</div>
+        <div class="wk-dates">17–23 agosto</div>
         <div class="wk-sub">Settimana successiva</div>
         <div class="chips" id="chips-w34"></div>
       </div>
@@ -230,8 +230,8 @@ footer { margin-top: 3rem; text-align: center; font-size: 11px; color: var(--mut
           <label>Settimana extra</label>
           <select id="sel-week">
             <option value="">— seleziona —</option>
-            <option value="w32">Week 32 · 4–10 ago</option>
-            <option value="w34">Week 34 · 18–24 ago</option>
+            <option value="w32">Week 32 · 3–9 ago</option>
+            <option value="w34">Week 34 · 17–23 ago</option>
           </select>
         </div>
         <button class="btn-add" id="btn-add" onclick="addRequest()">+ Aggiungi</button>
@@ -257,7 +257,7 @@ footer { margin-top: 3rem; text-align: center; font-size: 11px; color: var(--mut
 
   </div>
 
-  <footer>ferie2025 · dati salvati su JSONBin · aggiornato in tempo reale</footer>
+  <footer>ferie2026 · dati salvati su JSONBin · aggiornato in tempo reale</footer>
 </div>
 
 <script>
@@ -429,7 +429,7 @@ function renderCoverage() {
     const absent = g.members.filter(m => requests.some(r => r.name === m && r.week === wk));
     const present = g.members.filter(m => !requests.some(r => r.name === m && r.week === wk));
     const ok = present.length > 0;
-    const wlabel = wk === "w32" ? "W32 · 4–10 ago" : "W34 · 18–24 ago";
+    const wlabel = wk === "w32" ? "W32 · 3–9 ago" : "W34 · 17–23 ago";
     const detail = ok
       ? `${wlabel} · presenti: ${present.map(n=>n.split(" ")[0]).join(", ")}`
       : `${wlabel} · nessuno presente ⚠`;
